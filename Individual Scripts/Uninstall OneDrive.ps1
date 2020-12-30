@@ -1,5 +1,5 @@
 Write-Output "Uninstalling OneDrive. Please wait."
-    
+
     New-PSDrive  HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT
     $onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
     $ExplorerReg1 = "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}"
@@ -13,7 +13,7 @@ Write-Output "Uninstalling OneDrive. Please wait."
 	Start-Sleep 2
     Write-Output "Stopping explorer"
     Start-Sleep 1
-	.\taskkill.exe /F /IM explorer.exe
+	taskkill.exe /F /IM explorer.exe
 	Start-Sleep 3
     Write-Output "Removing leftover files"
 	Remove-Item "$env:USERPROFILE\OneDrive" -Force -Recurse
@@ -26,7 +26,7 @@ Write-Output "Uninstalling OneDrive. Please wait."
     If (!(Test-Path $ExplorerReg1)) {
         New-Item $ExplorerReg1
     }
-    Set-ItemProperty $ExplorerReg1 System.IsPinnedToNameSpaceTree -Value 0 
+    Set-ItemProperty $ExplorerReg1 System.IsPinnedToNameSpaceTree -Value 0
     If (!(Test-Path $ExplorerReg2)) {
         New-Item $ExplorerReg2
     }
